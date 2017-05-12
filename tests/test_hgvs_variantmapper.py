@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import os
 import unittest
 
-from nose.plugins.attrib import attr
+import pytest
 
 import hgvs.dataproviders.uta
 import hgvs.parser
 import hgvs.variantmapper
 
 
-@attr(tags=["quick"])
+@pytest.mark.quick
 class Test_VariantMapper(unittest.TestCase):
     def setUp(self):
         self.hdp = hgvs.dataproviders.uta.connect()
@@ -29,7 +30,6 @@ class Test_VariantMapper(unittest.TestCase):
 
         self.assertEqual( str(var_c) , hgvs_c )
         self.assertEqual( str(var_p) , hgvs_p )
-
 
     def test_gcrp_invalid_input_type(self):
         hgvs_g = 'NC_000007.13:g.36561662C>T'
@@ -68,7 +68,7 @@ class Test_VariantMapper(unittest.TestCase):
 
 
 
-@attr(tags=["quick"])
+@pytest.mark.quick
 class Test_EasyVariantMapper(unittest.TestCase):
     def setUp(self):
         self.hdp = hgvs.dataproviders.uta.connect()
@@ -105,13 +105,13 @@ if __name__ == '__main__':
 
 ## <LICENSE>
 ## Copyright 2014 HGVS Contributors (https://bitbucket.org/biocommons/hgvs)
-## 
+##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
 ## You may obtain a copy of the License at
-## 
+##
 ##     http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing, software
 ## distributed under the License is distributed on an "AS IS" BASIS,
 ## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.

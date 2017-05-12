@@ -3,7 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import unittest
 
-from nose.plugins.attrib import attr
+import pytest
 
 import hgvs.dataproviders.uta
 
@@ -12,7 +12,7 @@ import hgvs.parser
 from hgvs.exceptions import HGVSError
 from hgvs.transcriptmapper import TranscriptMapper
 
-@attr(tags=["quick"])
+@pytest.mark.quick
 class Test_transcriptmapper(unittest.TestCase):
     ref = 'GRCh37.p10'
 

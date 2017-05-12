@@ -5,7 +5,9 @@ import unicodecsv as csv
 import re
 import unittest
 
-from nose.plugins.attrib import attr
+import unicodecsv as csv
+
+import pytest
 
 import hgvs.dataproviders.uta
 
@@ -22,7 +24,7 @@ def gcp_file_reader(fn):
         yield rec
 
 
-@attr(tags=["mapping"])
+@pytest.mark.mapping
 class Test_VariantMapper(unittest.TestCase):
     def setUp(self):
         self.hdp = hgvs.dataproviders.uta.connect()
@@ -109,12 +111,12 @@ class Test_VariantMapper(unittest.TestCase):
         for rec in gcp_file_reader('tests/data/gcp/DNAH11-dbSNP-NM_001277115.tsv'):
             self._test_gcp_mapping(rec)
 
-    @attr(tags=["regression"])
+    @pytest.mark.regression
     def test_regression(self):
         for rec in gcp_file_reader('tests/data/gcp/regression.tsv'):
             self._test_gcp_mapping(rec)
 
-    @attr(tags=["extra"])
+    @pytest.mark.extra
     def test_DNAH11_dbSNP_full(self):
         for rec in gcp_file_reader('tests/data/gcp/DNAH11-dbSNP.tsv'):
             self._test_gcp_mapping(rec)
@@ -154,7 +156,7 @@ class Test_VariantMapper(unittest.TestCase):
             if re.search('Ter$',hgvs_p_exp):
                 # if expected value doesn't have a count, strip it from the test
                 hgvs_p_test = re.sub('Ter\d+$','Ter',hgvs_p_test)
-            
+
             self.assertEquals(hgvs_p_exp, hgvs_p_test,
                               msg="%s != %s (%s)" % (hgvs_p_exp,hgvs_p_test,rec['id']))
 
@@ -165,13 +167,13 @@ if __name__ == '__main__':
 
 ## <LICENSE>
 ## Copyright 2014 HGVS Contributors (https://bitbucket.org/biocommons/hgvs)
-## 
+##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
 ## You may obtain a copy of the License at
-## 
+##
 ##     http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing, software
 ## distributed under the License is distributed on an "AS IS" BASIS,
 ## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.

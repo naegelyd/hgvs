@@ -65,35 +65,33 @@ setup(
     install_requires = [
         'psycopg2',
         'biopython',
-        'bioutils',
+        'bioutils<0.2.0',
         'multifastadb',
         'parsley',
         'recordtype',
     ],
 
     setup_requires = [
+        'pytest-runner',
         'hgtools',
-        'nose',
-        # 'nose-timer', causes errors when installing via pip; cause not investigated
-        #'sphinx',
-        #'sphinxcontrib-fulltoc',
     ],
 
     tests_require = [
-        'coverage',
+        'pytest',
+        'pytest-cov',
         'unicodecsv',
     ],
 )
 
 ## <LICENSE>
 ## Copyright 2014 HGVS Contributors (https://bitbucket.org/biocommons/hgvs)
-## 
+##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
 ## You may obtain a copy of the License at
-## 
+##
 ##     http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing, software
 ## distributed under the License is distributed on an "AS IS" BASIS,
 ## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.

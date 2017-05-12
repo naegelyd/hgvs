@@ -12,6 +12,9 @@ SELF:=$(firstword $(MAKEFILE_LIST))
 #UTA_DB_URL=sqlite:///tmp/uta-0.0.5.db
 #UTA_DB_URL=postgresql://localhost/uta
 #UTA_DB_URL=postgresql://localhost/uta_dev
+PKG=hgvs
+PKGD=$(subst .,/,${PKG})
+TEST_DIRS:=doc hgvs tests ./README.rst
 
 ############################################################################
 #= BASIC USAGE
@@ -69,16 +72,14 @@ upload_docs: %:
 #= TESTING
 # see test configuration in setup.cfg
 
-host-info:
-	(PS4="\n>>"; set -x; /bin/uname -a; ./sbin/cpu-info; /usr/bin/free) 2>&1 | sed -e 's/^/## /'
-
 #=> test -- run all tests (except those tagged "extra")
-test: host-info
-	python setup.py nosetests -A '(not tags) or ("extra" not in tags)'
+test:
+	python setup.py pytest --addopts="--cov=hgvs -m 'not extra' ${TEST_DIRS}"
 
 #=> test-* -- run tests with specified tag
-test-%: host-info
-	python setup.py nosetests -a 'tags=$*'
+test-%:
+	python setup.py pytest --addopts="--cov=hgvs -m ${*} ${TEST_DIRS}"
+	tox -- -m $* $(TEST_DIRS)
 
 #=> ci-test -- per-commit test target for CI
 ci-test: test
@@ -115,7 +116,7 @@ ${VE_PY}:
 	curl -sO  https://pypi.python.org/packages/source/v/virtualenv/virtualenv-${VE_MAJOR}.${VE_MINOR}.tar.gz
 	tar -xvzf virtualenv-${VE_MAJOR}.${VE_MINOR}.tar.gz
 	rm -f virtualenv-${VE_MAJOR}.${VE_MINOR}.tar.gz
-${VE_DIR}: ${VE_PY} 
+${VE_DIR}: ${VE_PY}
 	${SYSTEM_PYTHON} $< ${VE_DIR} 2>&1 | tee "$@.err"
 	/bin/mv "$@.err" "$@"
 
@@ -136,7 +137,7 @@ cleaner: clean
 #=> cleanest: above, and remove the virtualenv, .orig, and .bak files
 cleanest: cleaner
 	find . \( -name \*.orig -o -name \*.bak -o -name \*.rej \) -print0 | xargs -0r /bin/rm -v
-	/bin/rm -fr distribute-* *.egg *.egg-info *.tar.gz nosetests.xml cover __pycache__
+	/bin/rm -fr distribute-* *.egg *.egg-info *.tar.gz cover __pycache__
 	make -C examples $@
 #=> pristine: above, and delete anything unknown to mercurial
 pristine: cleanest
@@ -145,13 +146,13 @@ pristine: cleanest
 
 ## <LICENSE>
 ## Copyright 2014 HGVS Contributors (https://bitbucket.org/biocommons/hgvs)
-## 
+##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
 ## You may obtain a copy of the License at
-## 
+##
 ##     http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing, software
 ## distributed under the License is distributed on an "AS IS" BASIS,
 ## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.

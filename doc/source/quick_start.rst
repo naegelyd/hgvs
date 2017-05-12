@@ -98,7 +98,7 @@ really need to understand the architecture to use HGVS.)
 First, connect to UTA via :class:``hgvs.dataproviders.uta``:
 
 >>> import hgvs.dataproviders.uta
-hdp = hgvs.dataproviders.uta.connect()
+>>> hdp = hgvs.dataproviders.uta.connect()
 
 By default, you'll connect to the public UTA database instance hosted by
 `Invitae <http://invitae.com/>`_.
@@ -106,12 +106,12 @@ By default, you'll connect to the public UTA database instance hosted by
 Then, with that connection, instantiate an VariantMapper:
 
 >>> import hgvs.variantmapper
-variantmapper = hgvs.variantmapper.VariantMapper(hdp)
+>>> variantmapper = hgvs.variantmapper.VariantMapper(hdp)
 
 We can use this mapper to transform our transcript variant to a protein variant:
 
 >>> variantmapper.c_to_p(var_c1)
-SequenceVariant(ac=NP_001184249.1, type=p, posedit=Ser94Phe)
+SequenceVariant(ac=NP_001184249.1, type=p, posedit=(Ser94Phe))
 
 
 Map our variant to the genome
@@ -119,7 +119,7 @@ Map our variant to the genome
 
 Mapping between sequences is straightforward:
 
->>> var_g = variantmapper.c_to_g(var_c1,'GRCh37.p10')
+>>> var_g = variantmapper.c_to_g(var_c1, 'NC_000001.10')
 >>> var_g
 SequenceVariant(ac=NC_000001.10, type=g, posedit=150550916G>A)
 >>> str(var_g)
@@ -135,7 +135,7 @@ First, a posedit consists of a position and an edit.  Positions are
 **always** intervals, even if their string representation looks like a
 simple integer.  Interval bounds are referred to with ``start`` and
 ``end`` attributes.  As with edits, they may also be ``uncertain``.
- 
+
 >>> var_g.posedit.pos
 Interval(start=150550916, end=150550916, uncertain=False)
 
@@ -158,7 +158,7 @@ Either way, the sequence coordinate may be accessed via the ``base`` attribute:
 >>> var_g.posedit.pos.start.base
 150550916
 >>> type(var_g.posedit.pos.start.base)
-int
+<type 'int'>
 
 
 Map the genomic variant to another transcript
@@ -168,12 +168,11 @@ To map our genomic variant to another transcript, we need to provide a
 transcript accession. One way to get those is to ask the data
 provider:
 
->>> [ tx['ac'] for tx in hdp.get_tx_for_gene('MCL1') ]
-['NM_021960.4', 'NM_182763.2', 'NM_001197320.1']
+>>> txs = hdp.get_tx_for_gene('MCL1')
 
 Let's map to the transcript for which this is an intronic variant.
 
->>> var_c2 = variantmapper.g_to_c(var_g,'NM_182763.2','GRCh37.p10')
+>>> var_c2 = variantmapper.g_to_c(var_g,'NM_182763.2')
 >>> var_c2
 SequenceVariant(ac=NM_182763.2, type=c, posedit=688+403C>T)
 >>> var_c2.posedit.pos.start

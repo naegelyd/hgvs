@@ -5,7 +5,7 @@ import os
 import pprint
 import unittest
 
-from nose.plugins.attrib import attr
+import pytest
 
 from parsley import ParseError
 
@@ -29,7 +29,7 @@ class Test_Position(unittest.TestCase):
             self.assertEqual( var, str(v), 'parse-format roundtrip failed:'+pprint.pformat(v.posedit) )
 
 
-    @attr(tags=["quick"])
+    @pytest.mark.quick
     def test_parser_reject(self):
         fn = os.path.join( os.path.dirname(__file__), 'data', 'reject' )
         for var in open(fn,'r'):
@@ -41,7 +41,7 @@ class Test_Position(unittest.TestCase):
                 self.assertTrue(False, msg='expected HGVSParseError: %s (%s)' % (var,msg))
 
 
-    @attr(tags=["quick"])
+    @pytest.mark.quick
     def test_parser_posedit_special(self):
         # See note in grammar about parsing p.=, p.?, and p.0
         self.assertEqual( str(self.parser.parse_p_posedit('0')), '0' )

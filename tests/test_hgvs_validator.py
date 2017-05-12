@@ -3,7 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import unittest
 
-from nose.plugins.attrib import attr
+import pytest
 
 from hgvs.exceptions import HGVSValidationError
 import hgvs.dataproviders.uta
@@ -27,7 +27,8 @@ class Test_HGVSValidator(unittest.TestCase):
         self.assertTrue(self.vr.validate(self.hp.parse_hgvs_variant('NM_001005405.2:c.6C>A')))
 
 
-@attr(tags=["quick","validation"])
+@pytest.mark.quick
+@pytest.mark.validation
 class Test_HGVSIntrinsicValidator(unittest.TestCase):
     """Tests for internal validation"""
 
@@ -78,7 +79,7 @@ class Test_HGVSIntrinsicValidator(unittest.TestCase):
 
 
 
-@attr(tags=["validation"])
+@pytest.mark.validation
 class Test_HGVSExtrinsicValidator(unittest.TestCase):
     """Tests for external validation"""
 
