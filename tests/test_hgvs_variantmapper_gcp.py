@@ -159,7 +159,7 @@ class Test_VariantMapper(unittest.TestCase):
 
             if re.search('Ter$',hgvs_p_exp):
                 # if expected value doesn't have a count, strip it from the test
-                hgvs_p_test = re.sub('Ter\d+$','Ter',hgvs_p_test)
+                hgvs_p_test = re.sub(r'Ter\d+$','Ter',hgvs_p_test)
 
             self.assertEqual(hgvs_p_exp, hgvs_p_test,
                               msg="%s != %s (%s)" % (hgvs_p_exp,hgvs_p_test,rec['id']))
