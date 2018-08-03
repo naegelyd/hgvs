@@ -2,8 +2,9 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import abc
+import six
 
-class Interface(object):
+class Interface(six.with_metaclass(abc.ABCMeta, object)):
     """Variant mapping and validation requires access to external data,
     specifically exon structures, transcript alignments, and protein
     accessions.  In order to isolate the hgvs package from the myriad
@@ -25,8 +26,6 @@ class Interface(object):
     .. _UTA: http://bitbucket.org/biocommons/uta
     .. _Invitae: http://invitae.com/
     """
-
-    __metaclass__ = abc.ABCMeta
 
     def interface_version(self):
         return 1
