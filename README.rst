@@ -4,7 +4,7 @@ HGVS -- Tools to Parse, Format, and Map Biological Sequence Variants
 
 .. `PyPI <https://pypi.python.org/pypi?name=hgvs>`_
 
-| **Use:** |pypi_badge|  |install_status| | `Documentation <http://pythonhosted.org/hgvs/>`_ 
+| **Use:** |pypi_badge|  |install_status| | `Documentation <http://pythonhosted.org/hgvs/>`_
 | **Interact:** `Mailing List <https://groups.google.com/forum/#!forum/hgvs-discuss>`_ | `Report an Issue <https://bitbucket.org/biocommons/hgvs/issues?status=new&status=open>`_
 | **Develop:** `Source <https://bitbucket.org/biocommons/hgvs>`_ (status: |build_status|)
 
@@ -19,7 +19,7 @@ Citation:
 | *Bioinformatics*. 2014 Sep 30. `PubMed <http://www.ncbi.nlm.nih.gov/pubmed/25273102>`_ | `Open Access PDF <http://goo.gl/dq2uoW>`_
 
 ----
-  
+
 Important Notes
 ---------------
 
@@ -36,7 +36,7 @@ Important Notes
 ----
 
 Features
--------- 
+--------
 
 * `A formal grammar <http://pythonhosted.org/hgvs/grammar.html>`_ for HGVS variant names
 * `Classes <http://pythonhosted.org/hgvs/modules.html>`_ that model HGVS
@@ -85,15 +85,15 @@ An Example
   >>> var_g.posedit.pos.start
   SimplePosition(base=36561662, uncertain=False)
 
-  # format by stringification 
+  # format by stringification
   >>> str(var_g)
   'NC_000007.13:g.36561662C>T'
 
   # initialize the mapper for GRCh37 with splign-based alignments
   >>> hdp = hgvs.dataproviders.uta.connect()
-  >>> evm = hgvs.variantmapper.EasyVariantMapper(hdp)
+  >>> evm = hgvs.variantmapper.EasyVariantMapper(hdp,
   ...          primary_assembly='GRCh37', alt_aln_method='splign')
-  
+
   # identify transcripts that overlap this genomic variant
   >>> transcripts = evm.relevant_transcripts(var_g)
   >>> sorted(transcripts)
@@ -160,11 +160,11 @@ setting UTA_DB_URL.  The format is
 ``postgresql://<user>:<pass>@<host>/<db>``. For example:
 
    ``postgresql://uta_public:uta_public@uta.invitae.com/uta``
-  
-explicitly selects the public database, and 
+
+explicitly selects the public database, and
 
    ``postgresql://localhost/uta``
- 
+
 selects a local instance.  Developers can test connectivity like this:
 
    ``$ UTA_DB_URL=postgresql://localhost/uta make test-quick``
@@ -183,7 +183,7 @@ selects a local instance.  Developers can test connectivity like this:
 
 .. |build_status| image:: https://drone.io/bitbucket.org/biocommons/hgvs/status.png
   :target: https://drone.io/bitbucket.org/biocommons/hgvs
-  :align: middle 
+  :align: middle
 
 .. |install_status| image:: https://travis-ci.org/reece/hgvs-integration-test.png?branch=master
   :target: https://travis-ci.org/reece/hgvs-integration-test

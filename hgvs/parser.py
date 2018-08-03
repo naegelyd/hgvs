@@ -22,7 +22,7 @@ class Parser(object):
     according to the rule.  The class exposes all rules, so that it's
     possible to parse both full variant representations as well as
     components, like so:
-    
+
     >>> hp = Parser()
     >>> v = hp.parse_hgvs_variant("NM_01234.5:c.22+1A>T")
     >>> v
@@ -94,20 +94,20 @@ class Parser(object):
             try:
                 return self._grammar(s).__getattr__(rule_name)()
             except ometa.runtime.ParseError as exc:
-                raise hgvs.exceptions.HGVSParseError, hgvs.exceptions.HGVSParseError("{s}: char {exc.position}: {reason}".format(s=s, exc=exc, reason=exc.formatReason()))
+                raise hgvs.exceptions.HGVSParseError("{s}: char {exc.position}: {reason}".format(s=s, exc=exc, reason=exc.formatReason()))
         rule_fxn.__doc__ = "parse string s using `%s' rule" % rule_name
         return rule_fxn
 
 
 ## <LICENSE>
 ## Copyright 2014 HGVS Contributors (https://bitbucket.org/biocommons/hgvs)
-## 
+##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
 ## You may obtain a copy of the License at
-## 
+##
 ##     http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing, software
 ## distributed under the License is distributed on an "AS IS" BASIS,
 ## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
