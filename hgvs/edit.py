@@ -14,7 +14,7 @@ location).
 """
 
 
-import recordtype
+import hgvs.recordtype as recordtype
 
 from bioutils.sequences import aa_to_aa1, aa1_to_aa3
 
@@ -152,9 +152,9 @@ class AARefAlt( Edit, recordtype.recordtype('AARefAlt', [('ref',None),('alt',Non
 
         else:
             raise RuntimeError("Should not be here")
-            
+
         return '('+s+')' if self.uncertain else s
-    
+
     def _set_uncertain(self):
         """sets the uncertain flag to True; used primarily by the HGVS grammar
 
@@ -361,23 +361,23 @@ if __name__ == "__main__":
 # class Inv( Edit, recordtype.recordtype('Inv', [], default=None) ):
 #     def __str__(self):
 #         return ''
-# 
+#
 # class Con( Edit, recordtype.recordtype('Con', ['con'], default=None) ):
 #     def __str__(self):
 #         return self.con
-# 
+#
 # class ComplexVariant( Edit, recordtype.recordtype('ComplexVariant', ['edits','rel'], default=None) ):
 #     def __str__(self):
 #         return '[' + self.rel.join( self.edits ) + ']'
-# 
+#
 # class CompoundVariant( Edit, recordtype.recordtype('CompoundVariant', ['edits'], default=None) ):
 #     def __str__(self):
 #         return ';'.join( [ '['+e+']' for e in self.edits ] )
-# 
+#
 # class MosaicVariant( Edit, recordtype.recordtype('Edit', ['edit'], default=None) ):
 #     def __str__(self):
 #         return '[=/{self.edit}]'.format(self=self)
-# 
+#
 # class ChimericVariant( Edit, recordtype.recordtype('Edit', ['edit'], default=None) ):
 #     def __str__(self):
 #         return '[=//{self.edit}]'.format(self=self)
@@ -385,13 +385,13 @@ if __name__ == "__main__":
 
 ## <LICENSE>
 ## Copyright 2014 HGVS Contributors (https://bitbucket.org/biocommons/hgvs)
-## 
+##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
 ## You may obtain a copy of the License at
-## 
+##
 ##     http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing, software
 ## distributed under the License is distributed on an "AS IS" BASIS,
 ## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.

@@ -7,7 +7,7 @@ import warnings
 from Bio.Seq import Seq
 from bioutils.accessions import primary_assembly_accessions
 from bioutils.sequences import reverse_complement
-import recordtype
+import hgvs.recordtype as recordtype
 
 import hgvs.exceptions
 import hgvs.location
@@ -143,7 +143,7 @@ class VariantMapper(object):
                                              posedit=hgvs.posedit.PosEdit(pos_g, edit_g) )
         return var_g
 
-    
+
     def c_to_g(self, var_c, alt_ac, alt_aln_method='splign'):
         """Given a cDNA (c.) parsed HGVS variant, return a genomic (g.) variant on the specified transcript using
         the specified alignment method (default is 'splign' from NCBI).
@@ -379,7 +379,7 @@ class VariantMapper(object):
 class EasyVariantMapper(VariantMapper):
     """Provides simplified variant mapping for a single assembly and
     transcript-reference alignment method.
-    
+
     EasyVariantMapper is instantiated with a primary_assembly and
     alt_aln_method. These enable the following conveniences over
     VariantMapper:
@@ -418,27 +418,27 @@ class EasyVariantMapper(VariantMapper):
                 filename=upframe.filename,
                 lineno=upframe.lineno + 1)
 
-    def g_to_c(self, var_g, tx_ac): 
+    def g_to_c(self, var_g, tx_ac):
         return super(EasyVariantMapper, self).g_to_c(var_g, tx_ac, alt_aln_method=self.alt_aln_method)
 
-    def g_to_r(self, var_g, tx_ac): 
+    def g_to_r(self, var_g, tx_ac):
         return super(EasyVariantMapper, self).g_to_r(var_g, tx_ac, alt_aln_method=self.alt_aln_method)
 
-    def c_to_g(self, var_c): 
+    def c_to_g(self, var_c):
         alt_ac = self._alt_ac_for_tx_ac(var_c.ac)
         return super(EasyVariantMapper, self).c_to_g(var_c, alt_ac, alt_aln_method=self.alt_aln_method)
 
-    def r_to_g(self, var_r): 
+    def r_to_g(self, var_r):
         alt_ac = self._alt_ac_for_tx_ac(var_r.ac)
         return super(EasyVariantMapper, self).r_to_g(var_r, alt_ac, alt_aln_method=self.alt_aln_method)
 
-    def c_to_r(self, var_c): 
+    def c_to_r(self, var_c):
         return super(EasyVariantMapper, self).c_to_r(var_c)
 
-    def r_to_c(self, var_r): 
+    def r_to_c(self, var_r):
         return super(EasyVariantMapper, self).r_to_c(var_r)
 
-    def c_to_p(self, var_c): 
+    def c_to_p(self, var_c):
         return super(EasyVariantMapper, self).c_to_p(var_c)
 
     def relevant_transcripts(self, var_g):
@@ -456,7 +456,7 @@ class EasyVariantMapper(VariantMapper):
         instantiate this EasyVariantMapper)
 
         """
-        alt_acs = [e['alt_ac'] 
+        alt_acs = [e['alt_ac']
                    for e in self.hdp.get_tx_mapping_options(tx_ac)
                    if e['alt_aln_method'] == self.alt_aln_method
                    and e['alt_ac'] in self.primary_assembly_accessions]
@@ -473,13 +473,13 @@ class EasyVariantMapper(VariantMapper):
 
 ## <LICENSE>
 ## Copyright 2014 HGVS Contributors (https://bitbucket.org/biocommons/hgvs)
-## 
+##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
 ## You may obtain a copy of the License at
-## 
+##
 ##     http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing, software
 ## distributed under the License is distributed on an "AS IS" BASIS,
 ## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.

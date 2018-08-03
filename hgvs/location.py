@@ -8,7 +8,7 @@ This module provides for Representing the location of variants in HGVS nomenclat
 
   * integers and integer intervals (e.g., NC_012345.6:g.3403243_3403248A>C)
   * CDS positions and intervals (e.g., NM_01234.5:c.56+12_56+14delAC)
-  * CDS stop coordinates (e.g., NM_01234.5:c.*13A>C)  
+  * CDS stop coordinates (e.g., NM_01234.5:c.*13A>C)
 
 Classes:
 
@@ -19,7 +19,7 @@ Classes:
 """
 
 
-import recordtype
+import hgvs.recordtype as recordtype
 
 from bioutils.sequences import aa1_to_aa3
 
@@ -92,7 +92,7 @@ class BaseOffsetPosition( recordtype.recordtype(
     | c.*55    | CDS_END    |    0  |     55  | 3' UTR variant, 55 nt after STOP         |
     +----------+------------+-------+---------+------------------------------------------+
     """
-    
+
     def validate(self):
         "raise AssertionError if instance variables are invalid; otherwise return True"
         assert self.base is None or self.base != 0, 'BaseOffsetPosition base may not be 0'
@@ -179,13 +179,13 @@ class Interval( recordtype.recordtype(
 
 ## <LICENSE>
 ## Copyright 2014 HGVS Contributors (https://bitbucket.org/biocommons/hgvs)
-## 
+##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
 ## You may obtain a copy of the License at
-## 
+##
 ##     http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing, software
 ## distributed under the License is distributed on an "AS IS" BASIS,
 ## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
