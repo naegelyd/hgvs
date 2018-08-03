@@ -7,6 +7,7 @@ import pytest
 
 import hgvs.exceptions
 import hgvs.intervalmapper
+from six.moves import range
 
 
 @pytest.mark.quick
@@ -80,7 +81,7 @@ class Test_IntervalMapper(unittest.TestCase):
                hgvs.intervalmapper.Interval(5, 9)
         ]
 
-        ivp = [hgvs.intervalmapper.IntervalPair(iv1[i], iv2[i]) for i in xrange(len(iv1))]
+        ivp = [hgvs.intervalmapper.IntervalPair(iv1[i], iv2[i]) for i in range(len(iv1))]
         ivm = hgvs.intervalmapper.IntervalMapper(ivp)
         return ivm
 
