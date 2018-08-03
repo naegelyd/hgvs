@@ -69,6 +69,8 @@ setup(
         'multifastadb',
         'parsley',
         'recordtype',
+        'unicodecsv',
+        'six',
     ],
 
     setup_requires = [
@@ -79,7 +81,6 @@ setup(
     tests_require = [
         'pytest',
         'pytest-cov',
-        'unicodecsv',
     ],
 )
 
