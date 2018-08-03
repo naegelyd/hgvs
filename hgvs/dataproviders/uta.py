@@ -16,6 +16,7 @@ from six.moves.urllib import parse as urlparse
 
 from hgvs.dataproviders.interface import Interface
 from hgvs.decorators.lru_cache import lru_cache
+import six
 
 
 _uta_urls = {
@@ -403,7 +404,7 @@ class UTA_postgresql(UTABase):
                                           password=self.url.password)
 
         # remap sqlite's ? placeholders to psycopg2's %s
-        self.sql = {k: v.replace('?', '%s') for k, v in self.sql.iteritems()}
+        self.sql = {k: v.replace('?', '%s') for k, v in six.iteritems(self.sql)}
 
 
     def _get_cursor(self):

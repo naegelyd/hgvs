@@ -9,6 +9,7 @@ import pytest
 import hgvs.dataproviders.uta
 import hgvs.parser
 import hgvs.variantmapper
+import six
 
 
 @pytest.mark.quick
@@ -80,7 +81,7 @@ class Test_EasyVariantMapper(unittest.TestCase):
             'p': 'NP_001628.1:p.(Gly528Arg)'
         }
         hp = hgvs.parser.Parser()
-        self.var = { k:hp.parse_hgvs_variant(v) for k,v in self.hgvs.iteritems() }
+        self.var = { k:hp.parse_hgvs_variant(v) for k,v in six.iteritems(self.hgvs) }
 
 
     def test_c_to_g(self):
