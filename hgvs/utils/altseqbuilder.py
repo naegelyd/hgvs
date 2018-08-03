@@ -14,6 +14,7 @@ from Bio.Seq import Seq
 
 import hgvs.edit
 from hgvs.location import CDS_START, CDS_END
+import six
 
 DBG = False
 
@@ -46,7 +47,7 @@ class AltTranscriptData(recordtype.recordtype('AltTranscriptData', [
         :rtype recordtype
         """
         if len(seq) > 0:
-            if isinstance(seq, basestring):
+            if isinstance(seq, six.string_types):
                 seq = list(seq)
             seq_cds = seq[cds_start - 1:]
             if len(seq_cds) % 3 != 0:   # padding so biopython won't complain during the conversion

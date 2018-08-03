@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
+import six
 
 __doc__ = """
 hgvs.edit -- representation of edit operations in HGVS variants
@@ -51,7 +52,7 @@ class NARefAlt( Edit, recordtype.recordtype('NARefAlt', [('ref',None),('alt',Non
         >>> NARefAlt(7).ref_s
 
         """
-        return self.ref if (isinstance(self.ref,basestring) and self.ref and self.ref[0] in 'ACGTUN') else None
+        return self.ref if (isinstance(self.ref,six.string_types) and self.ref and self.ref[0] in 'ACGTUN') else None
 
     @property
     def ref_n(self):
