@@ -5,7 +5,6 @@ import logging
 import os
 import sqlite3
 import types
-import urlparse
 
 #TODO: make dynamic import with importlib
 import psycopg2
@@ -13,6 +12,7 @@ import psycopg2.extras
 import psycopg2.pool
 
 from bioutils.digests import seq_md5
+from six.moves.urllib import parse as urlparse
 
 from hgvs.dataproviders.interface import Interface
 from hgvs.decorators.lru_cache import lru_cache
@@ -109,7 +109,7 @@ class UTABase(Interface):
             select tx_ac,alt_ac,alt_strand,alt_aln_method,min(start_i) as start_i,max(end_i) as end_i
             from exon_set ES
             join transcript T on ES.tx_ac = t.ac
-            join exon E on ES.exon_set_id=E.exon_set_id 
+            join exon E on ES.exon_set_id=E.exon_set_id
             where alt_ac=? and alt_aln_method=?
             group by tx_ac,alt_ac,alt_strand,alt_aln_method
             having max(end_i)>? and min(start_i)<?
@@ -520,13 +520,13 @@ if __name__ == "__main__":
 
 ## <LICENSE>
 ## Copyright 2014 HGVS Contributors (https://bitbucket.org/biocommons/hgvs)
-## 
+##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
 ## You may obtain a copy of the License at
-## 
+##
 ##     http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing, software
 ## distributed under the License is distributed on an "AS IS" BASIS,
 ## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
