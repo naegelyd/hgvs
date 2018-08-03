@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import unicodecsv as csv
 import re
 import unittest
 
-import unicodecsv as csv
+from sys import version_info
+
+if version_info < (3, ):
+    import unicodecsv as csv
+else:
+    import csv
 
 import pytest
 

@@ -4,6 +4,7 @@ use_setuptools()
 from setuptools import setup, find_packages
 
 import re
+from sys import version_info
 
 
 with open('doc/description.txt') as f:
@@ -22,6 +23,11 @@ def version_handler(mgr, options):
         version += '.0'
         assert version in mgr.get_parent_tags('tip')
     return version
+
+if version_info < (3, ):
+    version_specific_requirements = ['unicodecsv']
+else:
+    version_specific_requirements = []
 
 setup(
     license = 'Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0)',
@@ -67,10 +73,8 @@ setup(
         'biopython',
         'multifastadb',
         'parsley',
-        'recordtype',
-        'unicodecsv',
         'six',
-    ],
+    ] + version_specific_requirements,
 
     setup_requires = [
         'pytest-runner',
