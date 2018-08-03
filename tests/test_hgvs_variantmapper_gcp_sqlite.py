@@ -45,17 +45,17 @@ class TestVariantMapperFast(unittest.TestCase):
 
         # g -> c
         var_c_test = self.hm.g_to_c(var_g, var_c.ac)
-        self.assertEquals(str(var_c_test), str(var_c))
+        self.assertEqual(str(var_c_test), str(var_c))
 
         # c -> g
         var_g_test = self.hm.c_to_g(var_c, var_g.ac)
-        self.assertEquals(str(var_g_test), str(var_g))
+        self.assertEqual(str(var_g_test), str(var_g))
 
         if var_p is not None:
             # c -> p
             var_p_test = self.hm.c_to_p(var_c, var_p.ac)
             hgvs_p_test = str(var_p_test)
-            self.assertEquals(hgvs_p_test, str(var_p))
+            self.assertEqual(hgvs_p_test, str(var_p))
 
 
 if __name__ == '__main__':

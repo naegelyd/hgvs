@@ -141,12 +141,12 @@ class Test_transcriptmapper(unittest.TestCase):
 
     def run_cases(self, tm, test_cases):
         for test_case in test_cases:
-            self.assertEquals(tm.g_to_r(test_case['g']), test_case['r'])
-            self.assertEquals(tm.r_to_g(test_case['r']), test_case['g'])
-            self.assertEquals(tm.r_to_c(test_case['r']), test_case['c'])
-            self.assertEquals(tm.c_to_r(test_case['c']), test_case['r'])
-            self.assertEquals(tm.g_to_c(test_case['g']), test_case['c'])
-            self.assertEquals(tm.c_to_g(test_case['c']), test_case['g'])
+            self.assertEqual(tm.g_to_r(test_case['g']), test_case['r'])
+            self.assertEqual(tm.r_to_g(test_case['r']), test_case['g'])
+            self.assertEqual(tm.r_to_c(test_case['r']), test_case['c'])
+            self.assertEqual(tm.c_to_r(test_case['c']), test_case['r'])
+            self.assertEqual(tm.g_to_c(test_case['g']), test_case['c'])
+            self.assertEqual(tm.c_to_g(test_case['c']), test_case['g'])
 
 
 if __name__ == '__main__':
@@ -267,13 +267,13 @@ if __name__ == '__main__':
     #    #
     #    ## around cds_start (208) and cds_end (1024), mindful of *non-coding* ins (4I)
     #    ## i.e., we *don't* need to account for the 4nt insertion here
-    #    #self.assertEquals(tm.r_to_c(208, 1024), (0, 1024 - 208, 0, 0))
-    #    #self.assertEquals(tm.c_to_r(0, 1024 - 208), (208, 1024, 0, 0))
-    #    #self.assertEquals(tm.g_to_c(150552214 - 208, 150552214 - 208), (0, 0, 0, 0))
-    #    #self.assertEquals(tm.c_to_g(0, 0), (150552214 - 208, 150552214 - 208))
+    #    #self.assertEqual(tm.r_to_c(208, 1024), (0, 1024 - 208, 0, 0))
+    #    #self.assertEqual(tm.c_to_r(0, 1024 - 208), (208, 1024, 0, 0))
+    #    #self.assertEqual(tm.g_to_c(150552214 - 208, 150552214 - 208), (0, 0, 0, 0))
+    #    #self.assertEqual(tm.c_to_g(0, 0), (150552214 - 208, 150552214 - 208))
     #    ## cds_end is in 2nd exon
-    #    #self.assertEquals(tm.g_to_c(150549967 - (1024 - 896), 150549967 - (1024 - 896)), (1024 - 208, 1024 - 208, 0, 0))
-    #    #self.assertEquals(tm.c_to_g(1024 - 208, 1024 - 208), (150549967 - (1024 - 896), 150549967 - (1024 - 896)))
+    #    #self.assertEqual(tm.g_to_c(150549967 - (1024 - 896), 150549967 - (1024 - 896)), (1024 - 208, 1024 - 208, 0, 0))
+    #    #self.assertEqual(tm.c_to_g(1024 - 208, 1024 - 208), (150549967 - (1024 - 896), 150549967 - (1024 - 896)))
     #
     #
     #def test_transcriptmapper_TranscriptMapper_3_IFI27L1(self):
@@ -334,13 +334,13 @@ if __name__ == '__main__':
 
 ## <LICENSE>
 ## Copyright 2014 HGVS Contributors (https://bitbucket.org/biocommons/hgvs)
-## 
+##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
 ## You may obtain a copy of the License at
-## 
+##
 ##     http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing, software
 ## distributed under the License is distributed on an "AS IS" BASIS,
 ## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.

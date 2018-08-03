@@ -137,12 +137,12 @@ class Test_VariantMapper(unittest.TestCase):
 
         # g -> c
         var_c_test = self.hm.g_to_c(var_g, var_c.ac)
-        self.assertEquals(str(var_c_test), str(var_c),
+        self.assertEqual(str(var_c_test), str(var_c),
                           msg="%s != %s (%s; HGVSg=%s)" % (str(var_c_test),str(var_c),rec['id'],rec['HGVSg']))
 
         # c -> g
         var_g_test = self.hm.c_to_g(var_c, var_g.ac)
-        self.assertEquals(str(var_g_test), str(var_g),
+        self.assertEqual(str(var_g_test), str(var_g),
                           msg="%s != %s (%s; HGVSc=%s)" % (str(var_g_test),str(var_g),rec['id'],rec['HGVSc']))
 
         if var_p is not None:
@@ -161,7 +161,7 @@ class Test_VariantMapper(unittest.TestCase):
                 # if expected value doesn't have a count, strip it from the test
                 hgvs_p_test = re.sub('Ter\d+$','Ter',hgvs_p_test)
 
-            self.assertEquals(hgvs_p_exp, hgvs_p_test,
+            self.assertEqual(hgvs_p_exp, hgvs_p_test,
                               msg="%s != %s (%s)" % (hgvs_p_exp,hgvs_p_test,rec['id']))
 
 
