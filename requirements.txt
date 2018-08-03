@@ -1,0 +1,1 @@
+-e git+https://git@github.com/naegelyd/bioutils.git@67ddd240b41cb8cffb180ef2ff3c2869d7b97e28#egg=bioutils

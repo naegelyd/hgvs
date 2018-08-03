@@ -65,7 +65,6 @@ setup(
     install_requires = [
         'psycopg2',
         'biopython',
-        'bioutils<0.2.0',
         'multifastadb',
         'parsley',
         'recordtype',
